@@ -18,6 +18,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libbz2-dev \
     liblzma-dev \
     libncurses5-dev \
+    bowtie \
+    bowtie2 \
+    samtools \
+    tabix \
     && rm -rf /var/lib/apt/lists/* \
     && ln -fs /usr/share/zoneinfo/$TZ /etc/localtime \
     && dpkg-reconfigure -f noninteractive tzdata
@@ -31,6 +35,6 @@ COPY . /opt/rsem
 # Build and install RSEM
 RUN make && make install
 
-ENV PATH="/usr/local/bin:${PATH}"
+ENV PATH="/usr/local/bin:/usr/bin:${PATH}"
 
 CMD ["bash"]
